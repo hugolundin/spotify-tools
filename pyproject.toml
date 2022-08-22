@@ -1,8 +1,11 @@
 [tool.poetry]
 name = "backupify"
 version = "0.1.0"
-description = ""
+description = "Backup Spotify playlists to a Parquet file."
 authors = ["Hugo Lundin <hugo@lundin.dev>"]
+homepage = "https://github.com/hugolundin/backupify"
+repository = "https://github.com/hugolundin/backupify"
+license = "MIT"
 
 [tool.poetry.scripts]
 backupify = "backupify.cli:backupify"
@@ -19,7 +22,31 @@ duckdb = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+pre-commit = "^2.19.0"
+isort = "^5.10.1"
+black = "^22.3.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+include = '\.pyi?$'
+exclude = '''
+    /(
+        \.git
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+    )/
+    '''
+
+[tool.isort]
+profile="black"
+sections="FUTURE,STDLIB,THIRDPARTY,FIRSTPARTY,LOCALFOLDER"
+length_sort=true
