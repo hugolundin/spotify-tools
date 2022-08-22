@@ -4,7 +4,8 @@ import sys
 
 import click
 import dotenv
-from tools import api
+
+from .tools import api
 
 
 @click.group()
@@ -25,8 +26,8 @@ def cli(ctx, spotify_client_id, spotify_client_secret, level):
     ctx.obj["spotify"] = api.spotify(spotify_client_id, spotify_client_secret)
 
 
-from tools.copy import copy
-from tools.backup import backup
+from .tools.copy import copy
+from .tools.backup import backup
 
 cli.add_command(backup)
 cli.add_command(copy)

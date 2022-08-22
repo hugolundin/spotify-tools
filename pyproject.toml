@@ -8,7 +8,7 @@ repository = "https://github.com/hugolundin/spotify-tools"
 license = "MIT"
 
 [tool.poetry.scripts]
-spotify-tools = "spotify-tools.cli:cli"
+spotify-tools = "spotify_tools.cli:cli"
 
 [tool.poetry.dependencies]
 python = "^3.10"
