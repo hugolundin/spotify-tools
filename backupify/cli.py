@@ -1,6 +1,4 @@
-import logging
-
-log = logging.getLogger(__name__)
+import logging; log = logging.getLogger(__name__)  # fmt: skip
 
 import os
 import sys
@@ -8,6 +6,8 @@ import sys
 import click
 import dotenv
 import spotipy
+
+from backupify import backupify
 
 SPOTIFY_SCOPE = "user-library-read,playlist-read-private,playlist-read-collaborative"
 SPOTIFY_REDIRECT_URI = "http://localhost:8000"
@@ -19,7 +19,7 @@ SPOTIFY_REDIRECT_URI = "http://localhost:8000"
 @click.option(
     "--level", type=click.Choice(logging._nameToLevel.keys()), default="WARNING"
 )
-def backupify(spotify_client_id, spotify_client_secret, level):
+def cli(spotify_client_id, spotify_client_secret, level):
     logging.basicConfig(
         stream=sys.stdout,
         format="%(levelname)s: %(message)s",
@@ -47,4 +47,4 @@ def backupify(spotify_client_id, spotify_client_secret, level):
 
 
 if __name__ == "__main__":
-    backupify()
+    cli()

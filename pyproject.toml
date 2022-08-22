@@ -8,7 +8,7 @@ repository = "https://github.com/hugolundin/backupify"
 license = "MIT"
 
 [tool.poetry.scripts]
-backupify = "backupify.cli:backupify"
+backupify = "backupify.cli:cli"
 
 [tool.poetry.dependencies]
 python = "^3.10"

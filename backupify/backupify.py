@@ -1,6 +1,6 @@
-import logging
+import logging; log = logging.getLogger(__name__)  # fmt: skip
 
-log = logging.getLogger(__name__)
+from datetime import date
 
 import pandas
 import spotipy
@@ -63,4 +63,6 @@ def run(spotify):
 
     pandas.DataFrame(
         tracks(spotify), columns=["Name", "Artists", "Playlist"]
-    ).to_parquet("spotify.parquet", compression="gzip")
+    ).to_parquet(
+        f"{date.today().isoformat()}-spotify-backup.parquet", compression="gzip"
+    )
