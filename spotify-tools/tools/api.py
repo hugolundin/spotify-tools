@@ -4,8 +4,15 @@ import os
 
 import spotipy
 
-SPOTIFY_SCOPE = "user-library-read,playlist-read-private,playlist-read-collaborative"
 SPOTIFY_REDIRECT_URI = "http://localhost:8000"
+
+SPOTIFY_SCOPE = (
+    "user-library-read,"
+    "playlist-read-private,"
+    "playlist-read-collaborative,"
+    "playlist-modify-private,"
+    "playlist-modify-public"
+)
 
 
 def spotify(spotify_client_id, spotify_client_secret):

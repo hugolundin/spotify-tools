@@ -14,7 +14,7 @@ def backup(ctx):
     spotify = ctx.obj["spotify"]
 
     pandas.DataFrame(
-        api.get_all_tracks(spotify), columns=["Name", "Artists", "Playlist"]
+        api.get_all_tracks(spotify), columns=["Name", "Artists", "URI", "Playlist"]
     ).to_parquet(
         f"{date.today().isoformat()}-spotify-backup.parquet", compression="gzip"
     )
