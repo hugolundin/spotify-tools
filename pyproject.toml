@@ -1,14 +1,14 @@
 [tool.poetry]
-name = "backupify"
+name = "spotify-tools"
 version = "0.1.0"
-description = "Backup Spotify playlists to a Parquet file."
+description = "Tools for working with Spotify. "
 authors = ["Hugo Lundin <hugo@lundin.dev>"]
-homepage = "https://github.com/hugolundin/backupify"
-repository = "https://github.com/hugolundin/backupify"
+homepage = "https://github.com/hugolundin/spotify-tools"
+repository = "https://github.com/hugolundin/spotify-tools"
 license = "MIT"
 
 [tool.poetry.scripts]
-backupify = "backupify.cli:cli"
+spotify-tools = "spotify-tools.cli:cli"
 
 [tool.poetry.dependencies]
 python = "^3.10"
