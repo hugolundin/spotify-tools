@@ -1,9 +1,11 @@
 import logging; log = logging.getLogger(__name__)  # fmt: skip
 
 import os
+import re
 
 import spotipy
 
+SPOTIFY_LIKED_SONGS = "Liked Songs"
 SPOTIFY_REDIRECT_URI = "http://localhost:8000"
 
 SPOTIFY_SCOPE = (
@@ -78,8 +80,12 @@ def _get_tracks(response):
         yield name, artists, uri
 
 
-def get_all_tracks(spotify: spotipy.Spotify):
+def get_all_tracks(spotify: spotipy.Spotify, regex: str = None):
     for playlist in playlists(spotify):
+        if regex and not re.match(regex, playlist["name"]):
+            logging.info(f"Skipping '{playlist['name']}'")
+            continue
+
         logging.info(f"Downloading '{playlist['name']}'")
         response = spotify.playlist_tracks(playlist["id"])
 
@@ -89,11 +95,14 @@ def get_all_tracks(spotify: spotipy.Spotify):
 
             response = spotify.next(response)
 
-    logging.info(f"Downloading 'Liked Songs'")
+    if regex and not re.match(regex, SPOTIFY_LIKED_SONGS):
+        return
+
+    logging.info(f"Downloading '{SPOTIFY_LIKED_SONGS}'")
     response = spotify.current_user_saved_tracks()
     while response:
         for track in _get_tracks(response):
-            yield *track, "Liked Songs"
+            yield *track, SPOTIFY_LIKED_SONGS
 
         response = spotify.next(response)
 

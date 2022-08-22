@@ -10,11 +10,13 @@ from . import api
 
 @click.command()
 @click.pass_context
-def backup(ctx):
+@click.option("--regex", type=str, default="")
+def backup(ctx, regex):
     spotify = ctx.obj["spotify"]
 
     pandas.DataFrame(
-        api.get_all_tracks(spotify), columns=["Name", "Artists", "URI", "Playlist"]
+        api.get_all_tracks(spotify, regex=regex),
+        columns=["Name", "Artists", "URI", "Playlist"],
     ).to_parquet(
         f"{date.today().isoformat()}-spotify-backup.parquet", compression="gzip"
     )
