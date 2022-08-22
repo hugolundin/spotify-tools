@@ -45,4 +45,24 @@ Options:
 
 Setting the level to `INFO` will give you information about what playlist is currently being downloaded.
 
-After running `backupify`, you will find a file named `YYYY-mm-dd-spotify.parquet` in the directory where the program was invoked.
+After running `backupify`, you will find a file named `YYYY-mm-dd-spotify.parquet` in the directory where the program was invoked. It can be queried using DuckDB:
+
+```
+D select Playlist, Count(Name) Songs from '*.parquet' where list_contains(Artists, 'The Go! Team') group by Playlist;
+┌─────────────────────────┬───────┐
+│        Playlist         │ Songs │
+├─────────────────────────┼───────┤
+│ Juli (2021)             │ 1     │
+│ Juni (2021)             │ 1     │
+│ Maj (2021)              │ 1     │
+│ Juli 2020               │ 2     │
+│ April 2019              │ 1     │
+│ Oktober 2018            │ 1     │
+│ Februari 2018           │ 12    │
+│ Discover Weekly Archive │ 6     │
+│ Your Top Songs 2019     │ 1     │
+│ Your Top Songs 2018     │ 1     │
+│ GO! TEAM FAVOURITES     │ 57    │
+│ Liked Songs             │ 21    │
+└─────────────────────────┴───────┘
+```
