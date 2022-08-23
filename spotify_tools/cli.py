@@ -23,14 +23,16 @@ def cli(ctx, spotify_client_id, spotify_client_secret, level):
     )
 
     dotenv.load_dotenv()
-    ctx.obj["spotify"] = api.spotify(spotify_client_id, spotify_client_secret)
+    ctx.obj = api.spotify(spotify_client_id, spotify_client_secret)
 
 
 from .tools.copy import copy
 from .tools.backup import backup
+from .tools.identify import identify
 
 cli.add_command(backup)
 cli.add_command(copy)
+cli.add_command(identify)
 
 if __name__ == "__main__":
-    cli(obj={})
+    cli()

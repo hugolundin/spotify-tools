@@ -2,6 +2,7 @@ import logging; log = logging.getLogger(__name__)  # fmt: skip
 
 import os
 import re
+from urllib.parse import urljoin, urlparse
 
 import spotipy
 
@@ -49,6 +50,18 @@ def playlists(spotify: spotipy.Spotify):
 
 def playlist(spotify: spotipy.Spotify, playlist_id: str):
     return spotify.playlist(playlist_id)
+
+
+def get_playlist_id_from_name(spotify, name):
+    for playlist in playlists(spotify):
+        if playlist["name"] == name:
+            return playlist["id"]
+
+    return None
+
+
+def get_playlist_id_from_url(url):
+    return urljoin(url, urlparse(url).path).split("/")[-1]
 
 
 def _get_tracks(response):

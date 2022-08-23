@@ -11,7 +11,7 @@ from . import api
 @click.option("--confirm/--no-confirm", show_default=True, default=True)
 @click.pass_context
 def copy(ctx, source_playlist_id, target_playlist_id, confirm):
-    spotify = ctx.obj["spotify"]
+    spotify = ctx.obj
     source = api.playlist(spotify, source_playlist_id)
     target = api.playlist(spotify, target_playlist_id)
 

@@ -12,7 +12,7 @@ from . import api
 @click.pass_context
 @click.option("--regex", type=str, default="")
 def backup(ctx, regex):
-    spotify = ctx.obj["spotify"]
+    spotify = ctx.obj
 
     pandas.DataFrame(
         api.get_all_tracks(spotify, regex=regex),
