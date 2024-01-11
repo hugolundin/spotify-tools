@@ -1,6 +1,6 @@
 import logging; log = logging.getLogger(__name__)  # fmt: skip
 
-import sys
+import sys, os
 
 import click
 import dotenv
@@ -23,16 +23,28 @@ def cli(ctx, spotify_client_id, spotify_client_secret, level):
     )
 
     dotenv.load_dotenv()
-    ctx.obj = api.spotify(spotify_client_id, spotify_client_secret)
 
+    if not spotify_client_id:
+        spotify_client_id = os.environ.get("SPOTIFY_CLIENT_ID")
+
+    if not spotify_client_secret:
+        spotify_client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET")
+
+    if spotify_client_id and spotify_client_secret:
+        ctx.obj = api.spotify(spotify_client_id, spotify_client_secret)
+    else:
+        log.error("No authentication provided.")
+        exit(1)
 
 from .tools.copy import copy
 from .tools.backup import backup
-from .tools.identify import identify
+from .tools.playlist import playlist
+from .tools.auth import auth
 
 cli.add_command(backup)
 cli.add_command(copy)
-cli.add_command(identify)
+cli.add_command(playlist)
+cli.add_command(auth)
 
 if __name__ == "__main__":
     cli()

@@ -1,6 +1,5 @@
 import logging; log = logging.getLogger(__name__)  # fmt: skip
 
-import os
 import re
 from urllib.parse import urljoin, urlparse
 
@@ -19,12 +18,6 @@ SPOTIFY_SCOPE = (
 
 
 def spotify(spotify_client_id, spotify_client_secret):
-    if not spotify_client_id:
-        spotify_client_id = os.environ.get("SPOTIFY_CLIENT_ID")
-
-    if not spotify_client_secret:
-        spotify_client_secret = os.environ.get("SPOTIFY_CLIENT_SECRET")
-
     s = spotipy.Spotify(
         auth_manager=spotipy.oauth2.SpotifyOAuth(
             client_id=spotify_client_id,

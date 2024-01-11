@@ -11,7 +11,7 @@ from . import api
 @optgroup.option("--name", help="Name to find the id for.")
 @optgroup.option("--url", help="URL to extract the id from.")
 @click.pass_context
-def identify(ctx, name, url):
+def playlist(ctx, name, url):
     spotify = ctx.obj
 
     if name:
