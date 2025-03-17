@@ -1,6 +1,7 @@
 import logging; log = logging.getLogger(__name__)  # fmt: skip
 
-import sys, os
+import os
+import sys
 
 import click
 import dotenv
@@ -36,10 +37,11 @@ def cli(ctx, spotify_client_id, spotify_client_secret, level):
         log.error("No authentication provided.")
         exit(1)
 
+
+from .tools.auth import auth
 from .tools.copy import copy
 from .tools.backup import backup
 from .tools.playlist import playlist
-from .tools.auth import auth
 
 cli.add_command(backup)
 cli.add_command(copy)

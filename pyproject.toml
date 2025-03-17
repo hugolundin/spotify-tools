@@ -1,34 +1,27 @@
-[tool.poetry]
-name = "spotify-tools"
+[project]
+name = "example"
 version = "0.1.0"
-description = "Tools for working with Spotify. "
-authors = ["Hugo Lundin <hugo@lundin.dev>"]
-homepage = "https://github.com/hugolundin/spotify-tools"
-repository = "https://github.com/hugolundin/spotify-tools"
-license = "MIT"
+description = "Tools for working with Spotify."
+requires-python = ">=3.12"
 
-[tool.poetry.scripts]
+dependencies = [
+    "spotipy",
+    "click",
+    "python-dotenv",
+    "pandas",
+    "duckdb",
+    "click-option-group",
+    "pyarrow"
+]
+
+authors = [{ name = "Hugo Lundin Münch", email = "hugo@lundin.dev" }]
+
+[project.scripts]
 spotify-tools = "spotify_tools.cli:cli"
 
-[tool.poetry.dependencies]
-python = "^3.10"
-spotipy = "^2.20.0"
-click = "^8.1.3"
-python-dotenv = "^0.20.0"
-pandas = "^1.4.3"
-duckdb = "^0.9.2"
-click-option-group = "^0.5.3"
-pyarrow = "^10.0.1"
-
-[tool.poetry.dev-dependencies]
-pytest = "^5.2"
-pre-commit = "^2.19.0"
-isort = "^5.10.1"
-black = "^22.3.0"
-
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
 
 [tool.black]
 include = '\.pyi?$'
